@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>运动框架2</title>
+    <style>
+        #run{
+            width:100px;
+            height: 100px;
+        }
+        #c{
+            background: #cc3366;
+        }
+        *{
+            width:100px;
+            height: 100px;
+        }
+        #sd{
+            position: relative;
+            background: #afcb08;
+            left: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div id="run"></div>
+    <p id="p"></p>
+    <p id="c"></p>
+    <p id="sd"></p>
+</body>
+
+<script>
+    var oDiv =document.getElementById("run");
+        oP=document.getElementById("p");
+        oC=document.getElementById("c");
+        oSd= document.getElementById("sd");
+        fn(oDiv,"width",1000,5000);
+
+    function fn(obj,attr,W,T) {
+        var t0 = new  Date();
+        var gcss = getcss();
+        var s0 = parseFloat(gcss.width);
+        var s =W;
+        var t =T;
+        requestAnimationFrame(go);
+        function go() {
+            var tn =new Date();
+            var tx =tn-t0;
+            var sx;
+            if(tx >=t){
+                sx = s;
+            }
+            else{
+                sx= (s-s0)*tx/t+s0;
+                requestAnimationFrame(go)
+            }
+            obj.style[attr] = sx+"px";
+        }
+        function getcss() {
+            return obj.currenStyle || getComputedStyle(obj);
+        }
+        fp(oP,"width",1000,5000);
+        function fp(obj,attr,W,T) {
+            var t0 = new Date();
+            var gcss = getcss();
+            var s0 = parseFloat(gcss.width);
+            var s = W;
+            var t = T;
+            requestAnimationFrame(go);
+
+            function go() {
+                var tn = new Date();
+                var tx = tn - t0;
+                var sx;
+                if (tx >= t) {
+                    sx = s;
+                }
+                else {
+                    sx = (s - s0) * (tx / t) *(tx / t) + s0;
+                    requestAnimationFrame(go)
+                }
+                obj.style[attr] = sx + "px";
+            }
+
+            function getcss() {
+                return obj.currenStyle || getComputedStyle(obj);
+            }
+        }
+        fc(oC,"width",1000,5000);
+        function fc(obj,attr,W,T) {
+            var t0 = new Date();
+            var gcss = getcss();
+            var s0 = parseFloat(gcss.width);
+            var s = W;
+            var t = T;
+            requestAnimationFrame(go);
+
+            function go() {
+                var tn = new Date();
+                var tx = tn - t0;
+                var sx;
+                if (tx >= t) {
+                    sx = s;
+                }
+                else {
+                    sx = (s - s0) * (tx / t) *(tx / t) *(tx / t)+ s0;
+                    requestAnimationFrame(go)
+                }
+                obj.style[attr] = sx + "px";
+            }
+
+            function getcss() {
+                return obj.currenStyle || getComputedStyle(obj);
+            }
+        }
+        sdg(oSd,"left",1000);
+        function sdg(obj,attr,targe) {
+
+            (function () {
+                var sta = parseFloat(re()[attr]);
+                    speed =3;
+                    tar=sta;
+                    c=requestAnimationFrame(dogo);
+
+                    function dogo() {
+                        tar  += speed;
+                        c=requestAnimationFrame(dogo);
+                        if(Math.abs(targe-tar<=speed)){
+                            cancelAnimationFrame(c);
+                            tar=targe;
+                        }
+                        obj.style.left = tar + "px";
+
+
+                        // if(tar>=targe){
+                        //     cancelAnimationFrame(c);
+                        //     obj.style.left = targe + "px";
+                        // }
+                        // else{
+                        //     if (targe-tar<=speed){
+                        //         tar=targe;
+                        //     }
+                        //     requestAnimationFrame(dogo);
+                        //     obj.style.left = tar + "px";
+                        // }
+                    }
+            })();
+            function re() {
+                return obj.currentStyle || getComputedStyle(obj);
+            }
+        }
+        obj.style.height =200 +"px";
+        console.log(111)
+    }
+</script>
+</html>

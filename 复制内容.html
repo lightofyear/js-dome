@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #get-message{
+            width: 100px;
+            height: 100px;
+            margin: 100px auto;
+            background: #ff6600;
+        }
+    </style>
+</head>
+<body>
+    <div id="get-message"></div>
+    <script>
+        var getMsg = document.getElementById("get-message"),
+            str ="";
+        clipboard();
+        function clipboard() {
+            str1 = window.location.href;
+         if(window.getSelection)//谷歌 ie>8
+        {
+            str=window.getSelection(str1+"1");
+            alert(1)
+        }
+        else if(document.getSelection)
+        {
+            str = document.getSelection(str1+"2");
+            alert(2)
+        }
+        else if(document.selection)//ie=<8
+        {
+            str = document.selection.createRange(str1+"3").text;
+            alert(3)
+        }
+        if(window.clipboardData) {//ie
+             alert("ie")
+            window.clipboardData.clearData();
+            window.clipboardData.setData("Text", str1);
+        }
+        alert(str+"123");
+        }
+
+
+
+
+
+
+        //getMsg.onclick =function (ev) {
+          //  str = window.location.href;
+            // str = window.clipboardData.getData("Text");//获取剪切板内容
+            //alert(str);
+           //str1 = window.clipboardData.setData("Text",str);//将str剪切到剪切板,成功返回true;
+            //alert(str1);
+            // var str2 = window.clipboardData.clearData("Text"); //删除成功返回true;
+           // alert(str2);
+        //}
+    </script>
+</body>
+</html>

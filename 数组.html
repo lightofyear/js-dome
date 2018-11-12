@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box li{
+            width: 200px;
+            margin: 10px auto;
+            background: chocolate;
+            cursor: pointer;
+        }
+        #box .click{
+            background: #00aaff;
+        }
+    </style>
+    <!--<script src="array.js"></script>-->
+</head>
+<body>
+<ul id="box">
+    <li class="click"></li>
+    <li></li>
+    <li></li>
+</ul>
+</body>
+<script>
+    console.log(window.navigator.userAgent);
+    console.log(window.navigator.userAgent.indexOf('WebKit'));
+    console.log(/webkit/i   .test(window.navigator.userAgent));
+    console.log(window.location);
+    console.log(window.location.hash);
+    console.log(window.history);
+    var a = new Date().getTime();
+    setTimeout(function () {
+        var npage = window.open('https://www.baidu.com','new','width=500px,height=500px,left=100px,top=50px,scrollbars=0',false);
+        setTimeout(function () {
+            window.close.call(npage,npage);
+        },2000)
+    },3000)
+    function Circle(r) {
+        this.r = r;
+    }
+    Circle.prototype.area = function () {
+        return this.r*this.r*Math.PI;
+    }
+    var circle = new Circle(3);
+    console.log(circle.area());
+
+    let oLi = document.querySelectorAll('#box li'),
+        len = oLi.length,
+        cs = 0;
+    for(let i=0;i<2;i++){
+        oLi[i].onclick = function () {
+            oLi[cs].classList.remove('click');
+           this.classList.add('click');
+           cs =i;
+           console.log(i);
+        }
+        // oLi[i].onclick = (function (i) {
+        //     return function () {
+        //         this.className  += 'click';
+        //     };
+        // })(i);
+    }
+
+    var arr1 = [0,1,2,3,4,1,2,3,5];
+    // function arr() {
+    //     arr2 = arr1.filter(function (value,index,arr1) {
+    //         return arr1.indexOf(value)===index;
+    //     });
+    //     console.log(arr2);
+    // }
+    function arr() {
+        // for(var i=0;i<arr1.length;i++){
+        //     if(arr1.indexOf(arr1[i]) != i){
+        //         arr1.splice(i,1);
+        //         i = i-1;
+        //     }
+        // }
+        for(var i=arr1.length;i>0;i--){
+            if(arr1.indexOf(arr1[i]) != i){
+                arr1.splice(i,1);
+            }
+        }
+        console.log(arr1);
+    }
+    arr();
+</script>
+</html>

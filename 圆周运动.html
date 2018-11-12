@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: #000;
+        }
+        div{
+            position: absolute;
+            top: 440px;
+            left: 500px;
+            width: 200px;
+            height: 200px;
+            background: #99ff66;
+            border-radius: 50% 50%;
+            background: url("img/aa.jpg" ) no-repeat 0 0 /200px 200px;
+            /*background:radial-gradient(circle at center,#fff,#ffb447);*/
+        }
+        p{
+            position: absolute;
+            top: 200px;
+            left: 200px;
+            width: 50px;
+            height: 50px;
+            /*background: #99ff66;*/
+            border-radius: 50% 50%;
+            background: url("img/ck.png" ) no-repeat 0 0 /50px 50px;
+            /*background:radial-gradient(circle at center, #fff,#af8);*/
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <p></p>
+</body>
+<script>
+    var div = document.getElementsByTagName("div")[0];
+    var p = document.getElementsByTagName("p")[0];
+    // fn(div,"left","top",200,8000);
+    rfn(div,"left","top",400,200,200,8000);
+    function fn(obj,attr1,attr2,r,t) {
+        !function start() {
+            var left = parseFloat(getcss(obj)[attr1]),
+                top = parseFloat(getcss(obj)[attr2]),
+                x = left,
+                y =top-r,
+                t0= new Date(),
+                // st = Math.PI*2/t,//顺时针
+                st = -Math.PI*2/t,//逆时针
+                s = 0;
+                function go() {
+                  var  t1 = new Date();
+                        tx =t1 - t0;
+                  if (tx>t){
+                      t0 = new Date();//循环
+                      // t1 =t;
+                  }
+                    else {
+                      s = st*tx;
+                      left = x+r*Math.cos(s);
+                      top = y+r*Math.sin(s);
+                  }
+                  requestAnimationFrame(go);
+                  obj.style[attr1] = left+"px";
+                  obj.style[attr2] =top+"px";
+                }
+                go();
+        }();
+        function getcss(obj) {
+            return obj.currenStyle || getComputedStyle(obj);
+        }
+    }
+    function rfn(obj,attr1,attr2,x,y,r,t) {
+        !function start() {
+            var left = parseFloat(getcss(obj)[attr1]),
+                top = parseFloat(getcss(obj)[attr2]),
+                t0= new Date(),
+                // st = Math.PI*2/t,//顺时针
+                st = -Math.PI*2/t,//逆时针
+                s = 0;
+            function go() {
+                var  t1 = new Date();
+                tx =t1 - t0;
+                if (tx>t){
+                    t0 = new Date();//循环
+                    // t1 =t;
+                }
+                else {
+                    s = st*tx;
+                    left = x+r*Math.cos(s);
+                    top = y+r*Math.sin(s);
+                }
+                requestAnimationFrame(go);
+                obj.style[attr1] = left+"px";
+                obj.style[attr2] =top+"px";
+            }
+            go();
+        }();
+        function getcss(obj) {
+            return obj.currenStyle || getComputedStyle(obj);
+        }
+        rfn(p,"left","top",400,200,200,8000);
+    }
+</script>
+</html>

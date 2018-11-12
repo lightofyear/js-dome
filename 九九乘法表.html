@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>乘法表</title>
+    <style>
+        body,ul,li{margin:0;padding:0;}
+        ul{list-style: none; /*ackground: #00ccff ;*/}
+        li{
+            display: inline-block;
+            width: 80px;
+            height: 20px;line-height: 20px;
+            font-size: 16px;
+            border: 2px solid #99CC66;
+            text-align: center;
+            color: #bd2c00;
+        }
+    </style>
+
+</head>
+<body>
+<script>
+    var numb = 1;
+    var numb2 =9;
+    var obody =document.body;
+    var res;
+    for (numb=1;numb<10;numb++){
+        var oul=document.createElement("ul");
+        obody.appendChild(oul);
+        for (var i=1;i<numb+1;i++){
+            var oli=document.createElement("li");
+            oul.appendChild(oli);
+            res =numb*i;
+            oli.innerHTML = numb+"*"+i+"="+res;
+        }
+    }
+    for (numb=1;numb<10;numb++){
+        var oul=document.createElement("ul");
+        obody.appendChild(oul);
+        for (var i=numb;i<10;i++){
+            var oli=document.createElement("li");
+            oul.appendChild(oli);
+            res =numb*i;
+            oli.innerHTML = numb+"*"+i+"="+res;
+        }
+    }
+    for (numb2=9;numb2>0;numb2--){
+        var oul=document.createElement("ul");
+        obody.appendChild(oul);
+        for (var i=1;i<11-numb2;i++){
+            var oli=document.createElement("li");
+            oul.appendChild(oli);
+            res =numb2*i;
+            oli.innerHTML = numb2+"*"+i+"="+res;
+        }
+    }
+    for (numb2=9;numb2>0;numb2--){
+        var oul=document.createElement("ul");
+        obody.appendChild(oul);
+        for (var i=numb2;i>0;i--){
+            var oli=document.createElement("li");
+            oul.appendChild(oli);
+            res =numb2*i;
+            oli.innerHTML = numb2+"*"+i+"="+res;
+        }
+    }
+</script>
+</body>
+</html>

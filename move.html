@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            width:100px;
+            height: 100px;
+        }
+        #sd{
+            position: relative;
+            background: #afcb08;
+            left: 0px;
+        }
+    </style>
+</head>
+<body>
+<div id="sd"></div>
+</body>
+    <script src="../move.js"></script>
+    <script>
+        var oDiv = document.getElementById("sd");
+        fn(oDiv,"left",7,5000);
+        function fn(ele,attr,s,t){
+            var t0 = new Date();
+            !function () {
+
+                fn2();
+
+                function fn2() {
+                    t1 = new Date() -t0;
+                    var s0 = parseFloat(fn1(ele)[attr]);
+                    if(t1>t){
+                        t0= new Date();
+                        requestAnimationFrame(fn2);
+                        var left =Tween.backOut(t1,s0,s,t);
+                        console.log(left);
+                    }
+                    else {
+                        requestAnimationFrame(fn2);
+                        var left =Tween.backIn(t1,s0,s,t);
+                    }
+
+                    // var left = Tween.easeIn(t1,s0,s,t);
+
+                    ele.style[attr] =left +"px";
+
+                }
+
+            }();
+            function fn1(ele) {
+                return ele.currentStyle || getComputedStyle(ele);
+
+            }
+
+        }
+    </script>
+</html>

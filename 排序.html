@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>排序</title>
+</head>
+<style>
+    body,ul,li,p{margin: 0;padding: 0;}
+    #head{
+        position: relative;
+        width: 1000px;
+        height: 42px;
+        margin: 50px auto 10px;
+        background: #f8f8f8;
+        border: 1px solid #ddd;
+    }
+   #head p,#val{
+        width: 100px;
+        height: 42px;
+        line-height: 42px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    #val{
+        position: absolute;
+        width: 110px;
+        top: 0px;
+        left: 300px;
+    }
+    #head>p{
+        display: inline-block;
+    }
+    #px{
+        position: absolute;
+        display: none;
+        width: 110px;
+        height: 84px;
+        background: #f8f8f8;
+        border: 1px solid #ddd;
+        border-top:0px ;
+        top: 0px;
+        left: 5px;
+        z-index: 1;
+    }
+    ul{
+        width: 1000px;
+        height: 600px;
+        margin: 0 auto;
+        list-style: none;
+    }
+    li{
+        float: left;
+        width: 220px;
+        height: 250px;
+        border: 1px solid #ddd;
+        margin: 10px 14px 0;
+        position: relative;
+    }
+    img{
+        width: 210px;
+        height: 210px;
+        margin: 5px 5px;
+    }
+    .dj{
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        margin: 0;
+    }
+    li p{
+        display: inline-block;
+        font-size: 12px;
+        text-indent: 10px;
+    }
+    p.money{
+        position: absolute;
+        bottom: 20px;
+        right: 10px;
+        color: #99ff33;
+        font-size: 16px;
+    }
+</style>
+<body>
+    <div id="head">
+        <p>流行</p>
+        <p>热销</p>
+        <p>上新</p>
+        <div id="val">
+            <span id="vail">价格</span>
+            <div id="px">
+                <p>价格从高到低</p>
+                <p>价格从低到高</p>
+            </div>
+        </div>
+
+    </div>
+    <ul>
+        <li>
+            <img src="images/xh_img1.jpg" alt="">
+            <img src="images/price.png" alt="" class="dj">
+            <p>粉色玫瑰浪漫系列</p>
+            <p class="money">￥<span>500</span></p>
+        </li>
+        <li>
+            <img src="images/xh_img2.jpg" alt="">
+            <img src="images/price.png" alt="" class="dj">
+            <p>深红色经典玫瑰</p>
+            <p class="money">￥<span>100</span></p>
+        </li>
+        <li>
+            <img src="images/xh_img3.jpg" alt="">
+            <img src="images/price.png" alt="" class="dj">
+            <p>清淡优雅百年百合</p>
+            <p class="money">￥<span>300</span></p>
+        </li>
+        <li>
+            <img src="images/xh_img4.jpg" alt="">
+            <img src="images/price.png" alt="" class="dj">
+            <p>紫色冷艳系列</p>
+            <p class="money">￥<span>700</span></p>
+        </li>
+        <li>
+            <img src="images/xh_img5.jpg" alt="">
+            <img src="images/price.png" alt="" class="dj">
+            <p>经典红色我的最爱</p>
+            <p class="money">￥<span>500</span></p>
+        </li>
+        <li>
+            <img src="images/xh_img6.jpg" alt="">
+            <img src="images/price.png" alt="" class="dj">
+            <p>甜美七分袖荷叶边条纹设</p>
+            <p class="money">￥<span>130</span></p>
+        </li>
+        <li>
+            <img src="images/xh_img7.jpg" alt="">
+            <img src="images/price.png" alt="" class="dj">
+            <p>甜美七分袖荷叶边条纹设</p>
+            <p class="money">￥<span>215</span></p>
+        </li>
+        <li>
+            <img src="images/xh_img8.jpg" alt="">
+            <img src="images/price.png" alt="" class="dj">
+            <p>甜美七分袖荷叶边条纹设</p>
+            <p class="money">￥<span>99.5</span></p>
+        </li>
+    </ul>
+</body>
+    <script>
+        var pxp = document.querySelectorAll("#px p"),//两个排序按钮
+            val =document.getElementById("val"),//滑动显示两个按钮的div
+            vail =document.getElementById("vail"),//要修改的"价格"文本
+            px =document.getElementById("px"),//两个按钮
+            ul =document.querySelector("ul"),//ul
+            uli = document.querySelectorAll("ul li"),//ul所有li
+            pv =document.querySelectorAll(".money span"),//所有标签价格的值
+            pvi=[],//储存每个价格 后给min排序
+            am = [],//储存每个价格 给min进行对比,算出小到大,相应的li序号
+            min =pvi,//排序 按从小到大
+            px1=[],//储存 算出小到大,相应的li序号
+            a2,//算出小到大,相应的li序号  存入px1中
+            str=[],
+            str1=[],
+            str2=[],
+            len =uli.length;
+
+        for (var j=0;j<len;j++){//将每个单价转为numb型,存在pvi am中
+            pvi[j]=pv[j].innerHTML*1;
+            am[j]=pv[j].innerHTML*1;
+        }
+
+        for(var i=0;i<pxp.length;i++){//给两个按钮注册点击事件
+            pxp[0].bool =true;
+            pxp[i].onclick = function () {
+
+                vail.innerHTML = this.innerHTML;
+                px.style.display ="none";
+                vail.style.color ="red";
+                console.time();
+                fn(this.bool);
+            }
+        }
+        val.onmouseenter =function () {//进入显示按钮
+            px.style.display ="block";
+        }
+        val.onmouseleave =function () {//离开隐藏按钮
+            px.style.display ="none";
+        }
+        function aa(a,b) {  //作为顺序转换依据 a-b为升序,b-a为夅序
+            return a-b;
+        }
+        min = min.sort(aa); //转为升序
+
+        for(var i=0;i<len;i++){ //按照升序,一一匹配单价和每个li的序号
+            for(var j=0;j<len;j++){
+                if(am[j]==min[i]){
+                   a2 = j;
+                   am[j]=0;
+                    break;
+                }
+            }
+            px1[i]=a2;//匹配完的序号存在px1
+        }
+
+        for(var i=len-1;i>-1;i--){
+            str1 +=("<li>"+uli[px1[i]].innerHTML+"</li>" );
+        }
+        for(var i=0;i<len;i++){
+            str2 +=("<li>"+uli[px1[i]].innerHTML+"</li>" );
+        }
+
+        function fn(bool) {//给按钮添加动作
+            ul.innerHTML ="";
+            str=[];
+            bool? ul.innerHTML=str1 :ul.innerHTML=str2;
+            console.timeEnd();
+        }
+
+    </script>
+</html>

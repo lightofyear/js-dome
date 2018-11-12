@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象</title>
+</head>
+<body>
+<script>
+
+    //多态: 函数接收不同参数,执行不同程序;
+
+    //继承: 需要在某一类或对象的基础上,保留原有东西,同时拓展一些新东西,或去掉一些东西,只有对象才能加属性
+
+    //继承类 : 现有构造函数和原型,在new对象
+
+    function P(name,age) {
+        this.name=name;
+        this.age=age;
+    }
+    P.prototype.sayName =function () {
+        console.log(this.name);
+    }
+    P.prototype.sayAge=function () {
+        console.log(thisage)
+    }
+    var p = new  P("123",30);
+
+    //继承父类P
+
+    function C(a,nane,age) {
+        P.call(this,name,age);//继承父类所有
+        this.sex = "man";//子类新增
+    };//继承构造函数
+
+
+    // C.prototype = new P(); //继承父类原型 原型直接引用会导致父类的原型私有属性发生改变,不能用
+    // C.prototype.sayHello=function(){//子类新增原型
+    //     alert("hello");
+    // }
+
+    C.prototype = Object.create(P.prototype,{
+        z:{
+            value: 123,
+            configuable: true,
+            writable : true,
+            enumberable: true
+        },
+        constructor :{
+            configuable: false,
+            writable : false,
+            enumberable: false,
+            value :C
+        }
+
+    });
+
+    //继承 原型  新建一个空函数,让这个函数继承父类原型,在让子类的原型继承空函数,这个时候改变子类私有原型属性不会对空构造函数产生影响
+    // function F() {}
+    // F.prototype = P.prototype;
+    // C.prototype = new F();
+    // C.prototype.x= "123";
+    // Object.defineProperty(C.prototype,"constructor",{
+    //     configuable: false,
+    //     writable : false,
+    //     enumberable: false,
+    //     value :C
+    //  })
+
+    // var p2 = new C("123",20);
+    console.log(C.prototype);
+    console.log(P.prototype);
+
+    //单个对象
+    var A = {
+       age :  18,
+        name: "A",
+        xd : ["gg","jj","dd","mm"],
+        t :{
+           a :10,
+            b :20,
+            arr :[1,2,3]
+        }//一个对象,判断是不是对象,无限死循环;直到没有遍历到对象
+    };
+    //子对象继承父对象
+
+    //对象可以有数字属性,操作数字属性时 Obeject["0"]一定要加引号;
+
+    //扩展
+    var B= JSON.parse(JSON.stringify(A));
+    B.t.arr.push(5);
+    console.log(A,B);//A.t.arr 3  B.t.arr 4
+
+    var ppp = {
+        a:123,
+        b:{
+            a:321,
+            b:[5,4,3,{
+                a:4,
+                b:5,
+                c:{
+                    a:6 ,
+                    c:{
+                        a:[4,3,2,1,0]
+                    }
+                }
+            }]
+        }
+    };
+
+    function clone(obj) {//深拷贝
+
+        var o = Array.isArray(obj) ? []: {};
+            //不能拷贝函数
+            for(var key in obj){
+                var objKEY =  obj[key];
+                o[i] = /object/i .test(objKEY)? clone(objKEY) : objKEY ;
+            }
+
+            //
+            // for (var key in A){
+            //     var objKEY=A[key];
+            //     // console.log(Array.isArray(objKEY));
+            //     if (Array.isArray(objKEY)){
+            //         // o[key]=[].slice.apply(null,objKEY);//数组继承  把数组拆除新数组
+            //         /*或*/o[key]= objKEY.concat([]);
+            //     }
+            //     else {
+            //         if(/objeck/i.test(typeof  objKEY)){
+            //               o[key]= clone(objKEY);
+            //             clone();
+            //         }
+            //         else {
+            //             console.log(typeof  objKEY)
+            //             o[key] =  objKEY;
+            //         }
+            //     }
+            //
+            // }
+
+        return o;
+    }
+
+
+    var c=clone(ppp);
+    console.log(c);
+
+    // console.log(clone(A),A);
+
+    var a = A; //  a对A的引用;修改值时,会连同父类一起改变;   子继承父,继承父级所有方法和属性,儿子改变不会引起父级发生改变;
+
+    //严格JSON模式下 可以用 JSON.parse  JSON.stringify
+    a=JSON.parse(JSON.stringify(A));//先转为字符串,在转为数字,(只能是string型,或数字) a A
+    a.name = "a";
+    console.log(a.name,A.name); // 继承属性并改变原有属性  a,a
+
+    var p = {};
+    for(var key in A){
+        console.log(key);
+        p[key] = A[key];
+        console.log(key);
+    }//克隆继承
+    p.age = 30;
+    console.log(p.age,A.age);
+
+    var G = function (n) {
+        this.name = n;
+    }
+    G.prototype ={  //这样写.没有construct属性,要纠正constructor属性;
+        x : 50,
+        y :"123"
+    };
+
+    //纠正construct属性
+    Object.defineProperty(G.prototype,"constructor",{
+        configurable : false,
+        writable : false,
+        enumberable : false,
+        value : G
+    });
+
+    var x = new G();
+    console.log(x.x);
+
+    //defineproperties
+
+    var gn1 = {
+        name :"jq", //有值
+        age : "20"  //有值
+    }
+    Object.defineProperties(gn1,{
+        name :{
+            configurable : true,
+            writable : true,
+            enumberable : true,
+            value :20
+        },
+        age :{
+            configurable : true,
+            writable : true,
+            enumberable : true,
+            value :20
+        },
+        _age :{
+            get : function () {
+                
+            },
+            set : function () {
+                
+            }
+        }
+    })
+
+    //一个对象的属性可以分为   有值的属性 和 没有值的属性
+    //访问器属性没有值. 所以设置一个 访问器属性 需要用defineproperty设置;
+
+    var gn = {
+        name :"jq", //有值
+        age : "20"  //有值
+    }
+    //添加 有值属性
+    Object.defineProperty(gn,"sex",{
+            configurable :false ,
+            writable :true,
+            enumerable : false,
+            value :"men"
+        }
+    );
+
+    //添加 访问器属性
+    Object.defineProperty(gn,"_sex",{//结果undefined
+            configurable :false ,
+            enumerable : false,
+            get : function () {  }, //在读取时触发的回调函数  不是结果 可以读取其他属性赋值
+            set : function (v) {  }//在写入时触发的回调函数   不是结果 可以给其他属性赋值
+        }//单项数据绑定
+    );
+
+
+
+    //默认三条属性都为 true;
+    //如果一开始configurable被设置为false,后面再用defineproperty修改为true,会出错;
+    //第二次可以将writable修改,但其他三项重新设置会报错;
+
+    var person = {
+        name : "gn" ,
+        age : 18
+    }
+    Object.defineProperty(person,"name",{
+        //configurable:false,  //能不能被delectable删
+        // writable: true,   //能不能被修改
+        enumerable:false    //能不能被枚举--遍历
+        // value:           //在这里定义,其他不写,默认false;
+    }
+    );//都写也行.不写也行
+
+    //enumerable
+    for (var i in person){
+        //console.log(i);// true---name,age
+        console.log(i);// false---age
+    }
+
+    //configurable
+    // delete person.name ;//true--undefined
+    //delete person.name ;//false--gn
+
+    //writable
+    //person.name = "123";false//gn
+   // person.name = "123";true//123
+    console.log(person.name);
+
+    //defineproperty 将对象属性修改为只读不可写状态
+    //constructor 每个对象原型的默认属性-- 指向构造函数;
+    //instanceof--判断某个对象是否由某个函数构造出来的;
+    //hasOwnproperty--判断某个属性是否是自身属性(非原型属性);
+    // for in 可以遍历对象属性;
+
+    var Person = {
+      x : 123,
+      y : 122
+    };
+    for(var key in Person){
+        if (Person.hasOwnProperty(key)){
+            console.log(key)
+        }
+    }
+
+    var G=function () {}
+    G.prototype.x =1;
+
+    x1= new G;
+    console.log(x1.__proto__.constructor===G);//true
+    // console.log(x1);
+    console.log(G.prototype.__proto__);
+    console.log(x1.__proto__.__proto__===Object.prototype)
+    console.log(x1.__proto__===G.prototype);//true
+
+    //__proto__  每个对象的__proto__就是他构造函数的原型;
+
+    //  寻找属性值 --->原型链(x1(自身)-->Test.prototype(obj)--->obj.prototype位置)
+    //x1 构造函数--->Test() 原型--->Test.prototype(obj) 构造函数--->function obj(){} 原型--->obj.prototype ---> ... undefined
+
+
+
+    function Test() {
+        this.x=10;
+    }
+    Test.prototype.x= 20;
+
+
+
+    console.log(typeof Test.prototype.constructor);//object
+
+    var x1 =new Test();
+    console.log(x1.x);// 10; 函数里面有相应的属性,就不会找原型的属性;
+    console.log(typeof x1.constructor);//function
+
+
+    //原型里面的this指向实例化对象本身
+
+    //原型:构造函数--prototype 实例化对象原型;
+
+    //相同部分放原型里面,不同部分放构造函数里面;
+
+    function People(name,age) {
+        // var person ={};
+        this.name = name;
+        this.age = age;
+        this.from = "quanzhou";
+        // this.eat = function () {
+        //     // alert("面线糊");
+        //     console.log(this);
+        // }
+
+        // return person;
+    }
+
+    //people.prototype---构造原型 服务于所有个体
+    People.prototype.eat=function () {
+        console.log("面线糊");
+    }
+    People.prototype.hobby = "eat";//对象属性  可以被实例化对象访问;
+
+    var jq =new People("jq1",23);//类的实例化
+    var xc =new People("xc",22);
+
+    console.log(jq.hobby);
+
+
+
+
+
+    //创建类似对象,封装起来,不一样的传参,一样的写在函数里面;
+    /*
+    * new Date()
+    * new Image()
+    * new XMLHTTPRequest()
+    * new Array()
+    * new RegExp()
+    * new Object()
+    *
+    * new 后面都是函数
+    * */
+
+    // console.log(typeof Date);function
+
+    //new + 函数
+    /*
+    * 函数内部会产生一个对象,  this指向这个对象;
+    * 函数默认返回这个对象  等号= --- 相对于引用
+    * 如果没有new也没有return 默认返回undefined;
+    * 构造函数,类..
+    *
+    * */
+
+    function aaa() {
+        this.name="aaa";
+    }
+
+    var obj = new aaa();
+    console.log(obj.name);
+
+    function People(name,age) {
+        // var person ={};
+        this.name = name;
+        this.age = age;
+        this.from = "quanzhou";
+        this.eat = function () {
+            // alert("面线糊");
+            console.log(this);
+        }
+
+        // return person;
+    }
+    var jq =new People("jq1",23);//类的实例化
+    var xc =new People("xc",22);
+    xc.eat();
+</script>
+</body>
+</html>

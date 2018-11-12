@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+
+        var ac="123465874";
+        var sreg =/\d{1,2}/g;
+        var dxreg =/\d{3,4}5/g
+        alert(ac.match(dxreg));
+
+        // <!--var aaa="dddg445412448sffea";-->
+        // <!--var dd =/\d{0,5}/g;-->
+        // <!--alert(aaa.match(dd));-->
+        // <!--myqq = "5953";-->
+        // <!--reg_qq =/\d{5,11}/g;-->
+        // <!--if (myqq.match(reg_qq)){-->
+        //     <!--alert("谢谢您的配合!");-->
+        // <!--}-->
+        // <!--else {-->
+        //     <!--alert("非法账号,请重新输入!")-->
+        // <!--}-->
+        // var reg11 =/\d{1}/; //{1}{1,}{0,}
+        // var strr = "11abc55";
+        // alert(strr.match(reg11))
+
+
+
+
+
+        // alert(isNaN(1));
+        // alert(parseInt("a123"));
+
+       //arry.iindexOf("abc") == /abc/;
+
+        var str = "js-12,css-15,h5-10";
+        var a= get_Num(str);
+        function get_Num(str) {
+            var  x = "",
+                arry = [];
+            for(var i=0;len_s = str.length,i<len_s;i++){
+                if(!isNaN(str[i])){
+                    x += str[i];
+                }
+                else {
+                    x.length>1 && arry.push(x);
+                    x ="";
+                }
+            }
+            x && arry.push(x);
+            return arry;
+        }
+        var b = reg(str);
+        function reg(str) {
+            return str.match(/\d*/g);
+        }
+        // console.log(a,b)
+
+
+
+
+
+
+        // var  reg =/abc/;//以reg规则来检验...
+        // var  str ="abcddacdb";  //存在返回true;
+        // var reg_Text=reg.test(str);
+        // console.log(reg_Text);
+        //
+        //
+        // var a="123";
+        // var reg1 = new RegExp(a);
+        // var  mynumb ="15259560138";
+        // reg1_Text = reg1.test(mynumb);
+        // console.log(reg1_Text);//不存在返回false; false+1=1;并且为字符串型;
+        //
+        // var reg2 =/\d/;//只要有数字就是true;
+        // a1="a13";
+        // a2 = "aaa";
+        // reg2_Text = reg2.test(a1);
+        // reg3_Text = reg2.test(a2);
+        // console.log(reg3_Text);
+        //
+        // var reg4 =/\s/;
+        // var reg5 =/\S/;//当且仅当只含有空字符串时才会false;
+        // a3 = "aa 2";
+        // a4 = " ";
+        // console.log(reg4.test(a3));
+        // console.log("reg4"+reg4.test(a4));
+        //
+        // var reg6 = /\w/;//含有数字字母下划线的就是true
+        // var reg7 = /\W/;//含有非....也是true
+        // a5 = "123";
+        // a6 = "avc";
+        // a7 = "___";
+        // a8 = "abc_123";
+        // a9 = " 123"
+        // console.log(reg6.test(a5));
+        // console.log(reg6.test(a6));
+        // console.log(reg6.test(a7));
+        // console.log(reg6.test(a8));
+        // console.log(reg7.test(a5));
+        // console.log(reg7.test(a6));
+        // console.log(reg7.test(a7));
+        // console.log(reg7.test(a8));
+        // // alert(reg6.test(a9));
+        // // alert(reg7.test(a9));
+        //
+        // var b1 = "abcdefg";
+        // reg12 = /\b efg\b/
+        // reg11 = /\b/;
+        // alert(reg11.test(b1).valueOf());
+    </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,p{margin:0;padding:0;}
+        #content{
+            width: 420px;
+            height: 270px;
+            margin: 50px auto;
+            position: relative;
+            text-align: center;
+            font-size: 12px;
+            color: #fff;
+        }
+        #switch{
+            width: 100%;
+            height: 30px;
+        }
+        #infinity ,#oneside{
+            width: 76px;
+            height: 100%;
+            line-height: 30px;
+            display: inline-block;
+
+            float: left;
+            cursor: pointer;
+        }
+        #infinity {
+            background: #ff6600;
+        }
+        #oneside {
+            margin-left: 10px;
+            background: #000;
+        }
+        #container{
+            width: 100%;
+            height: 240px;
+        }
+        .p{
+            width: 100%;
+            height: 22px;
+            line-height: 22px;
+            background: #4c4c4c;
+            font-size: 14px;
+        }
+        #left,#right{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            background: hsla(0 ,0% ,0% ,.5);
+            position: absolute;
+            font-size: 20px;
+            font-weight: bold;
+            top: 130px;
+            cursor: pointer;
+        }
+        #left{
+            left: 0px;
+        }
+        #right{
+            right: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <div id="switch">
+            <span id="infinity">循环切换</span>
+            <span id="oneside">单边切换</span>
+        </div>
+        <div id="container">
+            <p class="p" id="topp">1/6</p>
+            <img src="img/p1.png" alt="" id="img" width="420" height="195">
+            <p class="p" id="botp">第一张</p>
+        </div>
+        <i id="left"><</i>
+        <i id="right">></i>
+    </div>
+</body>
+<script>
+    var oInfinity =document.getElementById("infinity");
+    var oOneside =document.getElementById("oneside");
+    var oimg = document.getElementById("img");
+    var  oleft= document.getElementById("left");
+    var oright = document.getElementById("right");
+    var  otopp = document.getElementById("topp");
+    var  obotp = document.getElementById("botp");
+    var array =["一","二","三","四","五","六"];
+    var nub =1;
+
+    var der=true;
+
+    function swi() {
+        oInfinity.style.backgroundColor="#000";
+        oOneside.style.backgroundColor="#000";
+        this.style.backgroundColor="#ff6600";
+        this ===  oInfinity ?  der=true : der=false;
+        return der ;
+    }
+    function swileft() {
+        der ? iSl():iOl();
+    }
+    function swiright() {
+        der ? iSr():iOr();
+    }
+    function iSl() {
+
+        if(nub>1){
+            nub -=1;
+            oimg.src = "img/p"+nub+".png";
+        }
+        else {
+            nub =6;
+            oimg.src = "img/p"+nub+".png";
+        }
+        otopp.innerHTML=nub+"/6";
+        obotp.innerHTML="第"+array[nub-1]+"张";
+    }
+    function iOl() {
+        if(nub>1){
+            nub -=1;
+            oimg.src = "img/p"+nub+".png";
+        }
+        else {
+            alert("已经是第一张了");
+        }
+        otopp.innerHTML=nub+"/6";
+        obotp.innerHTML="第"+array[nub-1]+"张";
+    }
+    function iSr() {
+        if(nub<6){
+            nub +=1;
+            oimg.src = "img/p"+nub+".png";
+        }
+        else {
+            nub =1;
+            oimg.src = "img/p"+nub+".png";
+        }
+        otopp.innerHTML=nub+"/6";
+        obotp.innerHTML="第"+array[nub-1]+"张";
+    }
+    function iOr() {
+
+        if(nub<6){
+            nub +=1;
+            oimg.src = "img/p"+nub+".png";
+        }
+        else {
+            alert("已经是最后一张了");
+        }
+        otopp.innerHTML=nub+"/6";
+        obotp.innerHTML="第"+array[nub-1]+"张";
+    }
+    oInfinity.addEventListener("click",swi,false);
+    oOneside.addEventListener("click",swi,false);
+    oleft.addEventListener("click",swileft,false);
+    oright.addEventListener("click",swiright,false);
+</script>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: #ff6600;
+            top:10px;
+            left: 10px;
+            cursor: move;
+        }
+    </style>
+    <script src="../../../作业/DIV/瑞丽网/bannner.js"></script>
+</head>
+<body>
+    <div id="ddd"></div>
+    <script>
+       var oDiv = document.getElementById("ddd");
+
+       oDiv.onmousedown =function (ev) {
+           var ev = ev || window.event;
+           var x1 = ev.pageX;
+           var y1 = ev.pageY;
+           var rleft = this.offsetLeft;
+           var rtop = this.offsetTop;
+           document.onmousemove =function (ev) {
+           var x2 = ev.pageX;
+           var y2 = ev.pageY;
+           var x = x2 - x1;
+           var y = y2 - y1;
+            oDiv.style.top = y + rtop + "px";
+            oDiv.style.left = x + rleft + "px";
+           }
+           document.onmouseup = function () {
+               this.onmousemove = "";
+               this.onmouseup = "";
+           }
+
+
+       }
+       // function getCss() {
+       //     var css = oDiv.currentStyle || getComputedStyle(this),
+       //         rtop = css.top,
+       //         rleft = css.left,
+       //         top = parseFloat(rtop),
+       //         left =parseFloat(rleft);
+       //     var  cs = {
+       //         "top" :top,
+       //         "left" : left
+       //     };
+       //     return cs;
+       // }
+       //
+
+    </script>
+</body>
+
+</html>

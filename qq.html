@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>下拉</title>
+    <style>
+        body,ul ,li{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            height: 32px;
+            list-style: none;
+            overflow: hidden;
+        }
+        .first{
+            margin: 50px auto 0;
+        }
+        li{
+            width: 200px;
+            height: 32px;
+            line-height: 32px;
+            border:1px solid #aaa;
+            text-indent: 20px;
+            font-size: 12px;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+        .fh{
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+<ul class="first">
+    <li class="fh">同事</li>
+    <li>心爱</li>
+    <li>尼玛</li>
+    <li>大锤</li>
+    <li>全蛋</li>
+</ul>
+<ul>
+    <li class="fh">女友们</li>
+    <li>玉珍</li>
+    <li>思婷</li>
+    <li>淑金</li>
+    <li>巧玲</li>
+</ul>
+<ul>
+    <li class="fh">同事</li>
+    <li>心爱</li>
+    <li>尼玛</li>
+    <li>大锤</li>
+    <li>全蛋</li>
+</ul>
+</body>
+<script>
+    var fh = document.getElementsByClassName("fh"),
+        oul =document.querySelectorAll("ul"),
+        oli =document.getElementsByTagName("li"),
+        flen =fh.length,
+        llen = oli.length,
+        h1 = 168,
+        h2 =32,
+
+        i;
+    console.log(oul);
+    for (i=0;i<flen;i++){
+        fh[i].zdy = i;
+        fh[i].onclick =function () {
+            console.log("");
+            if(oul[this.zdy].style.height ===  h2+"px"||oul[this.zdy].style.height === ""){
+                fh[this.zdy].style.backgroundColor ="#fa5";
+                oul[this.zdy].style.height = h1 +"px";
+            }
+            else {
+                fh[this.zdy].style.backgroundColor ="#FFC0CB";
+                oul[this.zdy].style.height = h2 +"px";
+            }
+
+        }
+    }
+</script>
+</html>

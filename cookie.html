@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #cookie-test{
+            width: 100px;
+            height: 100px;
+            background: #ff6600;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="cookie-test"></div>
+    <div>
+        <input type="text" id="user">
+        <input type="password" id="psw">
+        <input type="submit" id="tj">
+    </div>
+    <script>
+
+
+
+        var cookie ={
+            oset : function (dataJson,date) {
+                console.log(dataJson);
+                var d=new Date(new Date().getTime()+date*24*60*60*1000).toUTCString();
+                for (var key in dataJson)document.cookie = key+"="+dataJson[key]+";"+"expires="+d;
+                return d;
+            },
+
+            oget : function (attr,firt_Comming) {
+                var value =  document.cookie.match(new  RegExp("\\b"+attr+"=([^;]+)(;|$)"));
+                return !value ? alert(firt_Comming) :  value[1];
+            },
+
+            oMove : function (dataJson) {
+                this.oset(dataJson,-1);
+            }
+        };
+        // alert(cookie.oget("123","欢迎您的到来"));
+
+
+
+
+
+        var Json ={
+            user1 :123,
+            psw1  :234
+        };
+        alert(cookie.oMove(Json));
+        // alert(cookie.oset(Json,2))
+
+        // var user =document.getElementById("user");
+        //  var psw =document.getElementById("psw");
+        //  var tj =document.getElementById("tj");
+        // var cookie_Test = document.getElementById("cookie-test");
+        // var save_Cookie=document.cookie ;
+        // var time = new Date().getTime();
+        // // var username ="user";
+        // // var psw = "password";
+        //
+        // window.onfocus = getCookie();
+        // document.cookie ="money=50$;expires="+new Date(time+10*60*1000).toUTCString();//10分钟60s1000ms
+        //
+        //
+        // tj.onclick = function (ev) {
+        //     if(user.value && psw.value){
+        //         document.cookie = "user="+user.value+";"+"expires="+new Date(time+24*60*60*1000).toUTCString();
+        //         document.cookie = "password="+psw.value+";"+"expires="+new Date(time+24*60*60*1000).toUTCString();
+        //         alert("更改成功");
+        //     }
+        //     else {
+        //         alert("请输入完整信息");
+        //     }
+        //
+        // }
+        //
+        //
+        // function getCookie() {
+        //     var username = document.cookie;
+        //     var password = document.cookie;
+        //   console.log(1);
+        // }
+        //
+        //
+        //
+        //
+        // cookie_Test.onclick =function (ev) {
+        //     var username = document.cookie;
+        //     var password = document.cookie;
+        //     var reg = /user/;
+        //     var reg1 =/\buser=([^;]+)(;|$)/;
+        //     var reg2 = /user=(.*?)(;|$)/;
+        //     var user1 = username.match(reg1);
+        //     var psw1 = password.match(reg1);
+        //     alert(username)
+        //     if (user1){
+        //         user2 = user1[0];
+        //         psw2 =psw1[0];
+        //         user3=user2.match(reg2);
+        //         psw3=psw2.match(reg2);
+        //         user.value =user3[1];
+        //         psw.value =psw3[1];
+        //         alert(psw3[1]);
+        //         // alert(username+"---/user/---"+user1+"---:/\buser=([^;]+)(;|$)/---"+user2 +"---/user=(.*?)(;|$)/" );
+        //     }
+        //     else {
+        //         alert("欢迎您的访问!");
+        //     }
+        //     // user.value = username;
+        //     // psw.value = password;
+        //     // alert(save_Cookie);
+
+        // }
+
+    </script>
+</body>
+</html>

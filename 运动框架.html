@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>运动框架</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: #8bc1de;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+    <script>
+        var oDiv = document.getElementsByTagName("div");
+           move(oDiv[0],"width",500,5000)
+            function move(obj,atrr,width,time) {//元素,属性,结束位置,结束时间
+                var stime = new Date(); //初始时间
+                var ocss =getcss(obj);
+                var sval =parseFloat(ocss.width);//获取初始位置
+                var tval =width;  //结束位置
+                var endt =time + stime;//结束时间
+                function fn() {
+                    var tx = new Date();//获取当前时间
+                    // var sx = (tval - sval)*(tx - stime)/time + sval;
+                    var sx = sval + (tval-sval)*(tx - stime)*(tx - stime)/(time*time)/2;
+                    obj.style[atrr]=sx + "px";
+                    if (tx - stime >= time){
+                        sx =width;
+                        obj.style[atrr]=sx + "px";
+                    }
+                    else {
+                        requestAnimationFrame(fn);
+                    }
+                    console.log(sx);
+                }
+                requestAnimationFrame(fn);
+                function getcss() {
+                    return obj.currentStyle || getComputedStyle(obj);
+                }
+            }
+    </script>
+</html>

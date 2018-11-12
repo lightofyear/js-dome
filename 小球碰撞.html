@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: #000000;
+            overflow: hidden;
+        }
+        /*div{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background: radial-gradient(circle at center,#FFFFFF,#ff6600);
+            border-radius: 50% 50%;
+        }*/
+    </style>
+</head>
+<body>
+    <!--<div id="xx"></div>-->
+    <!--<div id="xx1"></div>-->
+    <!--<div></div>-->
+    <!--<div></div>-->
+    <!--<div></div>-->
+    <!--<div></div>-->
+</body>
+<script>
+    goRun(20,30,10,7,100,20,["#f54a36","#56ae45"]);
+    goRun(20,50);
+    goRun();
+    function goRun(n,r,vx,vy,sx,sy,arry) {//个数,球的直径,x,y轴速度,初始坐标
+        if(!arry){
+            arry =["#56ae45"];
+        }
+        if(!n){
+            n=Math.round(Math.random()*80+20);
+            r= Math.round(Math.random()*50+10);
+        }
+        var alen = arry.length;
+        for(var i=0;i<n;i++){
+            var div = document.createElement("div");
+            var ai = Math.floor(Math.random()*alen);
+            div.style.position = "absolute";
+            div.style.width = r +"px";
+            div.style.height = r +"px";
+            div.style.borderRadius="50% 50%";
+            div.style.background ="radial-gradient(circle,#fff,"+arry[ai]+")";
+            document.body.appendChild(div);
+        }
+        var div = document.getElementsByTagName("div"),
+            len = div.length;
+        for (var i= 0;i<len; i++){
+            vx && vy ? fnn(div[i],vx,vy):fn(div[i]);
+        }
+
+        function fn(obj) {
+            var w = obj.offsetWidth,
+                h = obj.offsetHeight,
+                wBody = document.documentElement.clientWidth || document.body.clientWidth,
+                hBody = document.documentElement.clientHeight || document.body.clientHeight,
+                vx=Math.ceil(Math.random()*10),
+                vy=Math.ceil(Math.random()*8),
+                maxx = wBody - w,
+                maxy = hBody - h,
+                sx=Math.floor(Math.random()*maxx),
+                sy=Math.floor(Math.random()*maxy);
+            !function move() {
+                requestAnimationFrame(move);
+                sx +=vx;
+                sy +=vy;
+                if(sx+w>= wBody || sx<=0){
+                    vx = -vx;
+                    sx = Math.max(sx,0);
+                    sx = Math.min(sx,maxx);
+                    Rgb();
+
+                }
+                if(sy+h>= hBody || sy<=0){
+                    vy = -vy;
+                    sy = Math.max(sy,0);
+                    sy = Math.min(sy,maxy);
+                    Rgb();
+                }
+
+                function Rgb() {
+                    var r = Math.floor(Math.random()*256),
+                        g = Math.floor(Math.random()*256),
+                        b = Math.floor(Math.random()*256);
+                    rgb = "rgb("+r+","+g+","+b+")";
+                    obj.style.background = "radial-gradient(circle,#fff,"+rgb+")";
+                    // return rgb;
+                }
+
+                obj.style.left = sx+"px";
+                obj.style.top = sy +"px";
+
+            }();
+
+        }
+        function fnn(obj,vx,vy) {
+            var w = obj.offsetWidth,
+                h = obj.offsetHeight,
+                wBody = document.documentElement.clientWidth || document.body.clientWidth,
+                hBody = document.documentElement.clientHeight || document.body.clientHeight,
+
+                maxx = wBody - w,
+                maxy = hBody - h,
+                sx=Math.floor(Math.random()*maxx),
+                sy=Math.floor(Math.random()*maxy);
+            !function move() {
+                requestAnimationFrame(move);
+
+                sx +=vx;
+                sy +=vy;
+                if(sx+w>= wBody || sx<=0){
+                    vx = -vx;
+                    sx = Math.max(sx,0);
+                    sx = Math.min(sx,maxx);
+                    Rgb();
+
+                }
+                if(sy+h>= hBody || sy<=0){
+                    vy = -vy;
+                    sy = Math.max(sy,0);
+                    sy = Math.min(sy,maxy);
+                    Rgb();
+                }
+                function Rgb() {
+                    var r = Math.floor(Math.random()*256),
+                        g = Math.floor(Math.random()*256),
+                        b = Math.floor(Math.random()*256);
+                    rgb = "rgb("+r+","+g+","+b+")";
+                    obj.style.background = "radial-gradient(circle,#fff,"+rgb+")";
+                    // return rgb;
+                }
+
+                obj.style.left = sx+"px";
+                obj.style.top = sy +"px";
+            }();
+
+        }
+        for (i=0;i<len;i++){
+            div[i].i = i;
+            div[i].onmousemove =function () {
+
+                function wwhh() {
+                    wh1=Math.random()*40+30;
+                    requestAnimationFrame(wwhh);
+                }
+                wwhh();
+                div[this.i].style.width = wh1+ "px";
+                div[this.i].style.height =wh1 + "px";
+                console.log(this.i);
+            }
+            div[i].onmouseleave =function () {
+                function wwhh1() {
+                    requestAnimationFrame(wwhh1);
+                    var wh =Math.random()*10+10;
+
+                }
+                wwhh1();
+                div[this.i].style.width =wh + "px";
+                div[this.i].style.height =wh + "px";
+
+                console.log(this.i);
+            }
+        }
+
+    }
+
+
+    // var xx = document.getElementById("xx");
+    // var xx1 = document.getElementById("xx1");
+    //     fn(xx);
+    //     fnn(xx1,8,6);
+
+    // function fn(obj) {
+    //     var w = xx.offsetWidth,
+    //         h = xx.offsetHeight,
+    //         wBody = document.documentElement.clientWidth || document.body.clientWidth,
+    //         hBody = document.documentElement.clientHeight || document.body.clientHeight,
+    //         vx=Math.ceil(Math.random()*10),
+    //         vy=Math.ceil(Math.random()*8),
+    //         maxx = wBody - w,
+    //         maxy = hBody - h,
+    //         sx=Math.floor(Math.random()*maxx),
+    //         sy=Math.floor(Math.random()*maxy);
+    //     !function move() {
+    //         requestAnimationFrame(move);
+    //
+    //         sx +=vx;
+    //         sy +=vy;
+    //         if(sx+w>= wBody || sx<=0){
+    //             vx = -vx;
+    //             sx = Math.max(sx,0);
+    //             sx = Math.min(sx,maxx);
+    //             Rgb();
+    //
+    //         }
+    //         if(sy+h>= hBody || sy<=0){
+    //             vy = -vy;
+    //             sy = Math.max(sy,0);
+    //             sy = Math.min(sy,maxy);
+    //             Rgb();
+    //         }
+    //         function Rgb() {
+    //             var r = Math.floor(Math.random()*256),
+    //                 g = Math.floor(Math.random()*256),
+    //                 b = Math.floor(Math.random()*256);
+    //             rgb = "rgb("+r+","+g+","+b+")";
+    //             obj.style.background = "radial-gradient(circle,#fff,"+rgb+")";
+    //             // return rgb;
+    //         }
+    //
+    //         obj.style.left = sx+"px";
+    //         obj.style.top = sy +"px";
+    //
+    //     }();
+    //
+    // }
+    //     function fnn(obj,vx,vy) {
+    //         var w = xx.offsetWidth,
+    //             h = xx.offsetHeight,
+    //             wBody = document.documentElement.clientWidth || document.body.clientWidth,
+    //             hBody = document.documentElement.clientHeight || document.body.clientHeight,
+    //
+    //             maxx = wBody - w,
+    //             maxy = hBody - h,
+    //             sx=Math.floor(Math.random()*maxx),
+    //             sy=Math.floor(Math.random()*maxy);
+    //         !function move() {
+    //             requestAnimationFrame(move);
+    //
+    //             sx +=vx;
+    //             sy +=vy;
+    //             if(sx+w>= wBody || sx<=0){
+    //                 vx = -vx;
+    //                 sx = Math.max(sx,0);
+    //                 sx = Math.min(sx,maxx);
+    //                 Rgb();
+    //
+    //             }
+    //             if(sy+h>= hBody || sy<=0){
+    //                 vy = -vy;
+    //                 sy = Math.max(sy,0);
+    //                 sy = Math.min(sy,maxy);
+    //                 Rgb();
+    //             }
+    //             function Rgb() {
+    //                 var r = Math.floor(Math.random()*256),
+    //                     g = Math.floor(Math.random()*256),
+    //                     b = Math.floor(Math.random()*256);
+    //                 rgb = "rgb("+r+","+g+","+b+")";
+    //                 obj.style.background = "radial-gradient(circle,#fff,"+rgb+")";
+    //                 // return rgb;
+    //             }
+    //
+    //             obj.style.left = sx+"px";
+    //             obj.style.top = sy +"px";
+    //
+    //
+    //
+    //         }();
+    //
+    //     }
+</script>
+</html>

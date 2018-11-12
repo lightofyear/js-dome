@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全选与反选</title>
+</head>
+<style>
+    body,ul,li{
+        margin:0;
+        padding: 0;
+    }
+    ul{
+        list-style: none;
+        width: 200px;
+        height: 220px;
+        margin: 50px auto;
+        font-size: 12px;
+    }
+    li{
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        text-indent: 50px;
+        background: #4bba68;
+        background-image: url("img/ck.png") ;
+        background-repeat: no-repeat;
+        background-position:  10px 10px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .l0{
+        background-color: #99ff66;
+    }
+    .l1{
+        background-color: #6699ff;
+    }
+    .l3{
+        background-image: url("img/cked.jpg") ;
+    }
+    i{
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 1px solid #bd2c00;
+        margin: 10px 5px;
+        background: url("img/ck.png");
+        vertical-align: -16px;
+        cursor: pointer;
+    }
+    i:nth-of-type(3){
+        width: 40px;
+        line-height: 20px;
+        text-align: center;
+        vertical-align: 0px;
+    }
+</style>
+<body>
+    <ul>
+        <li>11111</li>
+        <li>22222</li>
+        <li>33333</li>
+        <li>44444</li>
+        <li>55555</li>
+        <li>66666</li>
+        <li>77777</li>
+        <i></i>全选
+        <i></i>反选
+        <i>全不选</i>
+    </ul>
+
+</body>
+<script>
+    var oli = document.getElementsByTagName("li"),
+        oi =document.getElementsByTagName("i"),
+        lil = oli.length,
+        arr =[],
+        n=0,
+        i ;
+
+    for(i=0;i<lil;i++){
+        var x = i%2;
+        oli[i].className += "l"+x;
+        oli[i].zdy =i;
+        oli[i].str =oli[i].className;
+        arr[i]=oli[i].className;
+
+        oli[i].onclick =function () {
+            n=0;
+            for(i=0;i<lil;i++){
+                if(oli[i].className.length >3){
+                    n++;
+                }
+            }
+            if(oli[this.zdy].className.length>3 ){
+                oli[this.zdy].className = oli[this.zdy].str;
+            }
+            else {
+                oli[this.zdy].className += " l3";
+            }
+            if (oli[this.zdy].className.length >3){
+                n++;
+            }
+            else {
+                n--;
+            }
+            if(n === lil){
+                oi[0].className="l3";
+            }
+            else {
+                oi[0].className="";
+            }
+        }
+    }
+
+    oi[0].onclick=function () {
+        if(oi[0].className ==="l3"){
+            oi[0] .className =""
+        }
+        else {
+            oi[0].className ="l3"
+        }
+        for (i=0;i<lil;i++){
+                oli[i].className += " l3";
+        }
+    };
+    oi[1].onclick=function () {
+        if (oi[1].className === "l3") {
+            oi[1].className = ""
+        }
+        else {
+            oi[1].className = "l3"
+        }
+        for(i=0; i<lil;i++){
+            if(oli[i].className.length >3){
+                oli[i].className =arr[i];
+            }
+            else {
+                oli[i].className +=" l3";
+            }
+        }
+        n= 0;
+
+    }
+    oi[2].onclick=function (){
+        for(i=0;i<lil;i++){
+            oli[i].className=arr[i];
+        }
+        n=0;
+        oi[0].className="";
+    }
+</script>
+</html>

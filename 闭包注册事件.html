@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+<div>5</div>
+<script>
+    var oDiv = document.getElementsByTagName("div");
+
+    !function () {
+        for(var i of oDiv){
+            i.onclick=function () {
+                alert(this.innerText+"1111");
+            }
+        }
+        for(var i in oDiv){
+            oDiv[i].onmousemove=function () {
+                console.log(this.innerText);
+            }
+        }
+    }();
+
+    for(var i=0;i<oDiv.length;i++){
+        oDiv[i].onclick=function () {
+            alert(this.innerText);
+        }
+    }
+
+    var o =[1,2];
+    o.forEach(fn);//forEach不能直接操作类数组
+
+    function fn(n) {
+        console.log(n)
+    }
+
+
+    var d =new Date().getTime();
+
+        console.log(typeof d);
+
+    // console.log(oDiv[0]);
+</script>
+</body>
+</html>

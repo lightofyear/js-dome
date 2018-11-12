@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>复选框</title>
+    <style>
+        body,ul,li,p{margin: 0;padding: 0;}
+        #wrap{
+            width: 600px;
+            height: 70px;
+            margin: 50px auto;
+        }
+        #wrap p{
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            border-bottom: 1px dotted #000;
+        }
+        ul{
+            list-style: none;
+        }
+        .yx{
+            width: 70px;
+            height: 40px;
+            float: left;
+            background-image: url("img/ckbg1.jpg");
+            background-repeat: no-repeat;
+            text-indent: 25px;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        .lol{
+            background-image: url("img/ckbg2.jpg");
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <p>你最喜欢的英雄</p>
+        <ul>
+            <li class="yx">亚索</li>
+            <li class="yx">女警</li>
+            <li class="yx">瑞文</li>
+            <li class="yx">蛮王</li>
+            <li class="yx">盲僧</li>
+            <li class="yx">提莫</li>
+            <li class="yx">艾伦</li>
+            <li class="yx">EZ</li>
+        </ul>
+    </div>
+</body>
+<script>
+    var oyx =document.getElementById("wrap").getElementsByTagName("li");
+    var length =oyx.length;
+
+    for(var i=0;i<length;i++){
+        oyx[i].startname = oyx[i].className;
+        oyx[i].onclick = function () {
+            if(this.className === this.startname){
+                this.className +=" lol";
+            }
+            else{
+                this.className =this.startname;
+            }
+        }
+    }
+</script>
+</html>

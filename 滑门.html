@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滑门</title>
+    <style>
+        body{margin: 0; padding: 0;}
+        div{
+            position: relative;
+            width: 800px;
+            height: 500px;
+            margin: 50px auto;
+        }
+        .zz{
+            position: absolute;
+            margin: 0;
+            background: rgba(255,255,255,.9);
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="zz"></div>
+    <img src="img/1女孩.jpg" alt="" width="800" height="500">
+</div>
+<script>
+    var zz = document.getElementsByClassName("zz"),
+        num=500,
+        wz=0,
+        an=0;
+        setTimeout(fff,2000);
+
+        function fff() {
+            c=setInterval(fn,20);
+            function fn() {
+                wz>490 ? clearInterval(c) : num*1;
+                wz += 10;
+                num -=10;
+                zz[0].style.top = wz + "px";
+                zz[0].style.height = num + "px";
+            }
+        }
+        function animation() {
+            var date =new Date();
+            an +=1;
+            // console.log(an,date.getMilliseconds());
+            c=requestAnimationFrame(animation);
+            if (an>100){
+                cancelAnimationFrame(c);
+            }
+        }
+    animation();
+        var i,a1=getComputedStyle(zz[0]);
+        for(i in a1 ){
+            console.log(a1[i]);
+        }
+
+</script>
+</body>
+</html>

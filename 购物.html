@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物价格</title>
+    <style>
+        body,tr,td{
+            margin: 0;
+            padding: 0;
+        }
+        table,div{
+            margin: 30px auto 10px;
+        }
+        td{
+            width: 250px;
+            border: 1px solid #cc3366;
+            text-align: center;
+        }
+        .title td,div{
+            height: 50px;
+            line-height: 50px;
+            background: #4c4c4c;
+            color: #fff;
+        }
+        .goods td{
+            height: 100px;
+            line-height: 100px;
+        }
+        .img{
+            background: url("img/shop1.jpg") no-repeat center/80px 80px ;
+        }
+        tr:nth-last-of-type(1) .img {
+            background: url("img/shop2.jpg") no-repeat center/80px 80px ;
+        }
+        tr:nth-last-of-type(2) .img {
+            background: url("img/shop3.jpg") no-repeat center/80px 80px ;
+        }
+        tr:nth-last-of-type(3) .img {
+            background: url("img/shop4.jpg") no-repeat center/80px 80px ;
+        }
+        div{
+            width: 960px;
+            margin: 0px auto;
+            padding-right: 50px;
+        }
+        div span{
+            float: right;
+            margin-right: 20px;
+        }
+        i{
+            float: left;
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            margin-top: 8px;
+            background: #ddd;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        i.jh{
+            margin-left: 70px;
+        }
+        .num{
+            width: 50px;
+            background: #fff;
+            color: #ff6633;
+        }
+        #tjg,#zj{
+            display: inline-block;
+            width: 40px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<table cellpadding="0" cellspacing="0">
+    <tr class="title">
+        <td>商品</td>
+        <td>单价</td>
+        <td>数量</td>
+        <td>小计</td>
+    </tr>
+    <tr class="goods">
+        <td class="img"></td>
+        <td class="val">8</td>
+        <td class="js">
+            <i class="jh">-</i>
+            <i class="num">0</i>
+            <i class="jh1">+</i>
+        </td>
+        <td class="tv">0</td>
+    </tr>
+    <tr class="goods">
+        <td class="img"></td>
+        <td class="val">10</td>
+        <td class="js">
+            <i class="jh">-</i>
+            <i class="num">0</i>
+            <i class="jh1">+</i>
+        </td>
+        <td class="tv">0</td>
+    </tr>
+    <tr class="goods">
+        <td class="img"></td>
+        <td class="val">12</td>
+        <td class="js">
+            <i class="jh">-</i>
+            <i class="num">0</i>
+            <i class="jh1">+</i>
+        </td>
+        <td class="tv">0</td>
+    </tr>
+    <tr class="goods">
+        <td class="img"></td>
+        <td class="val">15</td>
+        <td class="js">
+            <i class="jh">-</i>
+            <i class="num">0</i>
+            <i class="jh1">+</i>
+        </td>
+        <td class="tv">0</td>
+    </tr>
+</table>
+<div id="total">
+    <span>￥</span>
+    <span id="tjg">0</span>
+    <span>总价格</span>
+    <span>件</span>
+    <span id="zj">0</span>
+    <span>已选中商品件数:</span>
+</div>
+</body>
+    <script>
+        var val =document.getElementsByClassName("val"),//获取单价
+            num =document.getElementsByClassName("num"),//数量
+            jh =document.getElementsByClassName("jh"),//减号
+            jh1= document.getElementsByClassName("jh1"),//加号
+            tv = document.getElementsByClassName("tv"),//单项总价
+            zs =document.getElementById("zj"),//总数件
+            tvg = document.getElementById("tjg"),//总价
+            dj =[],//单价
+            numb=[],//总数量
+            len =val.length,//长度
+            i,
+            j,
+            dxzj=[],//单项总价数组
+            zzs=0,//总计件
+            ttvg=0;//总价
+        for(i=0;i<len;i++){
+            dj.push(val[i].innerHTML*1) ;
+            numb.push(num[i].innerHTML*1) ;
+            jh[i].i =i;
+            jh[i].bool =true;
+            jh[i].onclick = re;
+            jh1[i].i =i;
+            jh1[i].onclick = re;
+        }
+        function re() {
+            var i = this.i;
+            this.bool ? numb[i] -=1:numb[i]+=1;
+            numb[i]<0 ? numb[i] =0 : numb[i] =numb[i];
+            num[i].innerHTML =numb[i];
+            tv[i].innerHTML =numb[i]*dj[i];
+            zzs=0;
+            ttvg=0;
+            dxzj=[];
+            for(j=0;j<len;j++){
+                dxzj.push(tv[j].innerHTML*1) ;
+                zzs += numb[j]*1;
+                ttvg += dxzj[j]*1;
+                console.log(dxzj);
+            }
+            zs.innerText =zzs;
+            tvg.innerText =ttvg;
+        }
+</script>
+</html>

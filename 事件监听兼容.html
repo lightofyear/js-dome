@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: #ff6600;
+            top:10px;
+            left: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="hh">我是:</div>
+    <script>
+        var div =document.getElementById("hh");
+        function event(doc,type,x) {
+            // doc.addEventListener(type,function () {
+            //     var arg = arguments;
+            //     x.apply(type,arg);
+            // })
+            var fn=function () { //变量存函数;方便处理
+                var arg = arguments;
+                x.apply(this,arg);
+            };
+            if(doc.addEventListener){
+                doc.addEventListener(type,fn);
+            }
+            else {
+                doc.attachEvent("on"+type,fn);
+            }
+            return fn;//返回函数fn
+        };
+
+       // function remove(doc,type,x) {
+       //     doc.removeEventListener(type,x)
+       // }
+        function fn(e) {
+            alert(this.innerHTML + e.clientX)
+        }
+
+        var event = event(div,"click",fn);//用变量代替函数;其实是代替return的fn;
+
+        off(div,"click",event);//off(div) 解除所有;
+        // remove(div,"click",fn);
+
+    </script>
+</body>
+</html>
